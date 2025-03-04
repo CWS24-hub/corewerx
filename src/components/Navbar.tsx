@@ -150,10 +150,10 @@ const Navbar = () => {
                 spy={true}
                 smooth={true}
                 duration={500}
-                className="text-[#4A2C00] hover:text-[#6B4226] px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors relative group"
+                className="text-white hover:text-white/80 px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors relative group"
               >
                 Home
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-amber-200/60 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white/60 group-hover:w-full transition-all duration-300"></span>
               </Link>
               
               {/* About Us link */}
@@ -162,10 +162,10 @@ const Navbar = () => {
                 spy={true}
                 smooth={true}
                 duration={500}
-                className="text-[#4A2C00] hover:text-[#6B4226] px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors relative group"
+                className="text-white hover:text-white/80 px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors relative group"
               >
                 About Us
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-amber-200/60 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white/60 group-hover:w-full transition-all duration-300"></span>
               </Link>
               
               {/* Services Dropdown */}
@@ -173,11 +173,11 @@ const Navbar = () => {
                 <button 
                   onClick={() => setServicesOpen(!servicesOpen)}
                   onMouseEnter={() => setServicesOpen(true)}
-                  className="text-[#4A2C00] hover:text-[#6B4226] px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors flex items-center gap-1 relative group"
+                  className="text-white hover:text-white/80 px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors flex items-center gap-1 relative group"
                 >
                   Our Services
                   <ChevronDown className="w-4 h-4" />
-                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-amber-200/60 group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white/60 group-hover:w-full transition-all duration-300"></span>
                 </button>
                 
                 {/* Mega Menu Dropdown - positioned to the right */}
@@ -228,10 +228,10 @@ const Navbar = () => {
                 spy={true}
                 smooth={true}
                 duration={500}
-                className="text-[#4A2C00] hover:text-[#6B4226] px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors relative group"
+                className="text-white hover:text-white/80 px-3 py-2 rounded-md text-lg font-medium cursor-pointer transition-colors relative group"
               >
                 Contact Us
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-amber-200/60 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white/60 group-hover:w-full transition-all duration-300"></span>
               </Link>
             </div>
           </div>
@@ -239,7 +239,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-[#4A2C00] hover:text-[#6B4226] hover:bg-[#D4AF6A] focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white/80 hover:bg-[#D4AF6A] focus:outline-none"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -268,7 +268,7 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
-              className="text-[#4A2C00] hover:text-[#6B4226] block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors"
+              className="text-white hover:text-white/80 block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Home
@@ -279,7 +279,7 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
-              className="text-[#4A2C00] hover:text-[#6B4226] block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors"
+              className="text-white hover:text-white/80 block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors"
               onClick={() => setIsOpen(false)}
             >
               About Us
@@ -289,7 +289,7 @@ const Navbar = () => {
             <div className="relative">
               <button 
                 onClick={() => setServicesOpen(!servicesOpen)}
-                className="text-[#4A2C00] hover:text-[#6B4226] w-full text-left px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors flex items-center justify-between"
+                className="text-white hover:text-white/80 w-full text-left px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors flex items-center justify-between"
               >
                 Our Services
                 <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
@@ -308,7 +308,7 @@ const Navbar = () => {
                           setServicesOpen(false);
                           setIsOpen(false);
                         }}
-                        className="flex items-center gap-2 text-[#4A2C00] font-medium cursor-pointer"
+                        className="flex items-center gap-2 text-white font-medium cursor-pointer"
                       >
                         <category.icon className="w-4 h-4" />
                         {category.title}
@@ -325,7 +325,7 @@ const Navbar = () => {
                                 setServicesOpen(false);
                                 setIsOpen(false);
                               }}
-                              className="text-[#4A2C00]/80 hover:text-[#6B4226] text-sm block py-1 cursor-pointer"
+                              className="text-white/80 hover:text-white text-sm block py-1 cursor-pointer"
                             >
                               {service}
                             </Link>
@@ -344,7 +344,7 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
-              className="text-[#4A2C00] hover:text-[#6B4226] block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors"
+              className="text-white hover:text-white/80 block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Contact Us
