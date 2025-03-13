@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { useTranslation } from 'react-i18next';
 import { Shield, Cloud, Monitor, Users, Database, ArrowRight, Briefcase } from 'lucide-react';
+import Spline from '@splinetool/react-spline';
 import StaticBackground from '../components/StaticBackground';
 
 const Hero = () => {
   const { t } = useTranslation();
+  const [splineLoaded, setSplineLoaded] = useState(false);
 
   const services = [
     { icon: Cloud, label: 'Cloud', link: 'cloud' },
@@ -18,13 +20,22 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-dark-navy/10">
-      <StaticBackground 
-        src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&q=80" 
-        overlay={false}
-      />
+      {/* Spline 3D Background */}
+      <div className="absolute inset-0 z-0">
+        {!splineLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-dark-navy/80">
+            <div className="w-12 h-12 border-4 border-bright-cyan border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
+        <Spline 
+          scene="https://prod.spline.design/PEG1P-Zw80VayvEe/scene.splinecode"
+          onLoad={() => setSplineLoaded(true)}
+          className="w-full h-full"
+        />
+      </div>
       
-      {/* Lighter overlay to make the section brighter */}
-      <div className="absolute inset-0 bg-white/60 z-[1]"></div>
+      {/* Content Overlay */}
+      <div className="absolute inset-0 bg-white/30 backdrop-blur-sm z-[1]"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -41,14 +52,23 @@ const Hero = () => {
           />
           
           <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-dark-navy"
+            className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight text-dark-navy"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Smarter IT. <br />
-            <span className="text-bright-cyan">Stronger Business.</span>
+            Transform Your Business with <br />
+            <span className="text-bright-cyan bg-gradient-to-r from-bright-cyan to-electric-blue bg-clip-text text-transparent">Enterprise-Grade IT</span>
           </motion.h1>
+
+          <motion.p
+            className="text-xl md:text-2xl text-dark-navy/80 mb-8 font-medium max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Join 500+ businesses that trust our solutions for their critical IT infrastructure. Experience enterprise-level service with personalized attention.
+          </motion.p>
 
           <motion.div
             className="flex flex-wrap items-center gap-8 mb-12"
@@ -82,43 +102,46 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <Link
+              to="contact"
+              spy={true}
+              smooth={true}
+              duration={500}
+              className="bg-bright-cyan hover:bg-electric-blue text-white font-bold py-4 px-8 rounded-lg transition duration-300 cursor-pointer flex items-center gap-2 button-glow w-full sm:w-auto justify-center"
+            >
+              Get Free Consultation
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link
               to="about"
               spy={true}
               smooth={true}
               duration={500}
-              className="bg-bright-cyan hover:bg-electric-blue text-white font-bold py-3 px-8 rounded-lg transition duration-300 cursor-pointer flex items-center gap-2 button-glow"
+              className="border-2 border-bright-cyan hover:border-electric-blue text-dark-navy font-bold py-4 px-8 rounded-lg transition duration-300 cursor-pointer bg-white/50 backdrop-blur-sm w-full sm:w-auto justify-center flex items-center"
             >
-              Who We Are
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="cloud"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="border border-bright-cyan/30 hover:border-bright-cyan/60 text-dark-navy font-bold py-3 px-8 rounded-lg transition duration-300 cursor-pointer bg-white/50 backdrop-blur-sm"
-            >
-              Explore Services
+              Why Choose Us
             </Link>
           </motion.div>
-        </motion.div>
-      </div>
 
-      {/* Animated data streams in background - made lighter */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[2]">
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={i}
-            className="data-stream absolute"
-            style={{
-              left: `${Math.random() * 100}%`,
-              height: `${Math.random() * 30 + 20}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${Math.random() * 5 + 5}s`,
-              opacity: '0.1' // Reduced opacity
-            }}
-          />
-        ))}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-bright-cyan/20">
+              <div className="text-bright-cyan font-bold text-3xl mb-1">98%</div>
+              <div className="text-dark-navy font-medium">Client Retention Rate</div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-bright-cyan/20">
+              <div className="text-bright-cyan font-bold text-3xl mb-1">24/7</div>
+              <div className="text-dark-navy font-medium">Expert IT Support</div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-bright-cyan/20">
+              <div className="text-bright-cyan font-bold text-3xl mb-1">35%</div>
+              <div className="text-dark-navy font-medium">Cost Reduction</div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       <motion.div

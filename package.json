@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.0.51",
     "crypto-js": "^4.2.0",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^11.0.8",

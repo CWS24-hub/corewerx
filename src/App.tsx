@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Element } from 'react-scroll';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
@@ -12,7 +12,7 @@ import ShareLink from './components/ShareLink';
 import AdminPanel from './components/AdminPanel';
 import AdminLogin from './components/AdminLogin';
 import PasswordResetPage from './components/PasswordResetPage';
-import { Settings, Lock } from 'lucide-react';
+import { Lock } from 'lucide-react';
 
 // Service Sections
 import CloudSection from './sections/ServiceSections/CloudSection';
@@ -21,17 +21,50 @@ import TechnologySection from './sections/ServiceSections/TechnologySection';
 import NetworkingSection from './sections/ServiceSections/NetworkingSection';
 import CRMSection from './sections/ServiceSections/CRMSection';
 import WorkplaceSection from './sections/ServiceSections/WorkplaceSection';
+import ContinuitySection from './sections/ServiceSections/ContinuitySection';
 
 // Landing Pages
 import CloudSolutions from './pages/LandingPages/CloudSolutions';
 import CyberSecurity from './pages/LandingPages/CyberSecurity';
 import ManagedIT from './pages/LandingPages/ManagedIT';
+import EmailLicensing from './pages/LandingPages/EmailLicensing';
+import BusinessContinuity from './pages/LandingPages/BusinessContinuity';
+
+// SEO Component
+const SEO = ({ location }: { location: { pathname: string } }) => {
+  useEffect(() => {
+    // Update meta tags based on current route
+    const path = location.pathname;
+    let title = "CoreWerx Solutions - Enterprise IT & Cloud Services in UAE";
+    let description = "Transform your business with enterprise-grade IT solutions. Specializing in cloud services, cybersecurity, managed IT, and business continuity solutions in Dubai, UAE.";
+
+    switch (path) {
+      case '/landing/cloud':
+        title = "Cloud Solutions & Microsoft 365 Services | CoreWerx Solutions";
+        description = "Enterprise cloud solutions including Microsoft 365, Azure, and cloud migration services. Transform your business with our expert cloud services in Dubai, UAE.";
+        break;
+      case '/landing/security':
+        title = "Enterprise Cybersecurity Solutions | CoreWerx Solutions";
+        description = "Comprehensive cybersecurity solutions including threat detection, SOC services, and security training. Protect your business with enterprise-grade security.";
+        break;
+      // Add cases for other routes
+    }
+
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+  }, [location]);
+
+  return null;
+};
 
 function App() {
   const [showLogoAdjuster, setShowLogoAdjuster] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isResetPasswordPage, setIsResetPasswordPage] = useState(false);
+  const location = useLocation();
 
   // Check if user is admin
   useEffect(() => {
@@ -78,28 +111,29 @@ function App() {
   }
 
   return (
-    <Router>
+    <div className="min-h-screen bg-blue-50 text-gray-800">
+      <SEO location={location} />
+      <Navbar />
+      
       <Routes>
         {/* Landing Pages */}
         <Route path="/landing/cloud" element={<CloudSolutions />} />
         <Route path="/landing/security" element={<CyberSecurity />} />
         <Route path="/landing/managed-it" element={<ManagedIT />} />
+        <Route path="/landing/email-licensing" element={<EmailLicensing />} />
+        <Route path="/landing/continuity" element={<BusinessContinuity />} />
         
         {/* Main Website */}
         <Route path="/" element={
-          <div className="min-h-screen bg-blue-50 text-gray-800">
-            <Navbar />
-            
+          <main>
             <Element name="home">
               <Hero />
             </Element>
 
-            {/* About Us section moved to appear right after Hero */}
             <Element name="about">
               <AboutSection />
             </Element>
 
-            {/* Service Sections */}
             <Element name="cyber-security">
               <CyberSecuritySection />
             </Element>
@@ -110,6 +144,10 @@ function App() {
 
             <Element name="cloud">
               <CloudSection />
+            </Element>
+
+            <Element name="continuity">
+              <ContinuitySection />
             </Element>
 
             <Element name="networking">
@@ -127,44 +165,42 @@ function App() {
             <Element name="contact">
               <ContactSection />
             </Element>
-
-            <Chatbot />
-            <Footer />
-
-            {/* Share Link Component */}
-            <ShareLink />
-
-            {/* Admin Login Button - Only visible to non-admins */}
-            {!isAdmin && (
-              <button 
-                onClick={() => setShowAdminLogin(true)}
-                className="fixed bottom-20 right-4 z-40 bg-gray-500 hover:bg-gray-600 text-white rounded-full p-3 shadow-lg opacity-30 hover:opacity-100 transition-opacity"
-                title="Admin Login"
-              >
-                <Lock size={20} />
-              </button>
-            )}
-
-            {/* Admin Panel - Only visible to admins */}
-            {isAdmin && (
-              <AdminPanel onLogout={handleAdminLogout} />
-            )}
-
-            {/* Admin Login Modal */}
-            <AdminLogin 
-              isOpen={showAdminLogin}
-              onClose={() => setShowAdminLogin(false)}
-              onLogin={handleAdminLogin}
-            />
-
-            {/* Logo Adjuster Modal */}
-            {showLogoAdjuster && (
-              <LogoAdjuster onClose={() => setShowLogoAdjuster(false)} />
-            )}
-          </div>
+          </main>
         } />
       </Routes>
-    </Router>
+
+      <Chatbot />
+      <Footer />
+      <ShareLink />
+
+      {/* Admin Login Button - Only visible to non-admins */}
+      {!isAdmin && (
+        <button 
+          onClick={() => setShowAdminLogin(true)}
+          className="fixed bottom-20 right-4 z-40 bg-gray-500 hover:bg-gray-600 text-white rounded-full p-3 shadow-lg opacity-30 hover:opacity-100 transition-opacity"
+          title="Admin Login"
+        >
+          <Lock size={20} />
+        </button>
+      )}
+
+      {/* Admin Panel - Only visible to admins */}
+      {isAdmin && (
+        <AdminPanel onLogout={handleAdminLogout} />
+      )}
+
+      {/* Admin Login Modal */}
+      <AdminLogin 
+        isOpen={showAdminLogin}
+        onClose={() => setShowAdminLogin(false)}
+        onLogin={handleAdminLogin}
+      />
+
+      {/* Logo Adjuster Modal */}
+      {showLogoAdjuster && (
+        <LogoAdjuster onClose={() => setShowLogoAdjuster(false)} />
+      )}
+    </div>
   );
 
   function handleAdminLogin() {

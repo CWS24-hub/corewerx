@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './i18n';
 import './index.css';
@@ -36,7 +37,7 @@ const applyLogoSettings = () => {
   height: ${settings.desktopPosition.height}px !important;
   object-fit: contain;
   max-width: 100%;
-  transform: translateX(${settings.desktopPosition.x }px) translateY(${settings.desktopPosition.y}px) scaleX(${settings.desktopPosition.scale}) rotate(${settings.desktopPosition.rotate}deg) !important;
+  transform: translateX(${settings.desktopPosition.x}px) translateY(${settings.desktopPosition.y}px) scaleX(${settings.desktopPosition.scale}) rotate(${settings.desktopPosition.rotate}deg) !important;
 }
 
 /* Navbar Mobile Logo Styles */
@@ -73,6 +74,8 @@ applyLogoSettings();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );

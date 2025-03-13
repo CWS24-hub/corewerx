@@ -9,37 +9,37 @@ const TechnologySection = () => {
     {
       icon: Monitor,
       title: 'IT Support',
-      description: 'Comprehensive technical support for your team',
+      description: 'Comprehensive system and infrastructure management',
       benefits: [
-        'Fast issue resolution',
-        'Reduced downtime',
-        'Improved productivity',
-        'Expert technical assistance'
+        'Proactive system maintenance',
+        'Infrastructure management',
+        'Advanced technical solutions',
+        'Strategic IT planning'
       ],
       features: [
-        '24/7 support availability',
-        'Multi-channel support',
-        'Ticket tracking system',
-        'Knowledge base access',
-        'Remote assistance'
+        'System administration',
+        'Network management',
+        'Security implementation',
+        'Infrastructure upgrades',
+        'IT policy management'
       ]
     },
     {
       icon: HeadphonesIcon,
-      title: 'Virtual CIO/CTO',
-      description: 'Strategic technology leadership and guidance',
+      title: 'Help Desk',
+      description: 'First-line technical support for immediate issues',
       benefits: [
-        'Expert technology guidance',
-        'Strategic IT planning',
-        'Budget optimization',
-        'Technology roadmapping'
+        'Quick issue resolution',
+        'Direct user assistance',
+        'Immediate response',
+        'Clear communication'
       ],
       features: [
-        'IT strategy development',
-        'Technology assessment',
-        'Budget planning',
-        'Vendor management',
-        'Regular business reviews'
+        'Password resets',
+        'Software troubleshooting',
+        'Basic hardware support',
+        'Connectivity issues',
+        'Ticket management'
       ]
     },
     {
@@ -95,7 +95,7 @@ const TechnologySection = () => {
             transition={{ duration: 0.8 }}
             className="text-4xl font-bold mb-6 text-white"
           >
-            Technology <span className="cyber-text">(MSP)</span>
+            Managed IT <span className="cyber-text">(MSP)</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

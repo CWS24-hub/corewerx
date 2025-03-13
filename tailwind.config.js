@@ -4,19 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        'navy': '#0A192F',
-        'dark-navy': '#060F1E',
-        'electric-blue': '#005A9C', // Darker blue
-        'bright-cyan': '#0097B2', // Darker cyan
-        '00a3ff': '#00729C', // Darker version
-        'neon-green': '#2A9D2A', // Darker green
+        'navy': '#0B2447', // More saturated navy
+        'dark-navy': '#051937', // Deeper, richer navy
+        'electric-blue': '#0066CC', // Brighter electric blue
+        'bright-cyan': '#00B4D8', // More vibrant cyan
+        '00a3ff': '#00A3FF', // Pure bright blue
+        'neon-green': '#39FF14', // Vibrant neon green
         'gray': {
-          100: '#F1F1F1', // Brightened
-          200: '#E1E1E1', // Brightened
-          300: '#C1C1C1', // Brightened
+          100: '#F8F9FA',
+          200: '#E9ECEF',
+          300: '#DEE2E6',
         },
-        'white': '#FFFFFF', // Pure white
-        'f8f9fa': '#F8F9FA', // Brightened
+        'white': '#FFFFFF',
+        'f8f9fa': '#F8F9FA',
         'amber': {
           50: '#FFF8E1',
           100: '#FFECB3',
@@ -78,11 +78,11 @@ export default {
         'pulse-glow': {
           '0%, 100%': { 
             opacity: 1,
-            boxShadow: '0 0 8px rgba(0, 151, 178, 0.3), 0 0 15px rgba(0, 151, 178, 0.2)'
+            boxShadow: '0 0 20px rgba(0, 180, 216, 0.4), 0 0 40px rgba(0, 180, 216, 0.2)'
           },
           '50%': { 
             opacity: 0.8,
-            boxShadow: '0 0 10px rgba(0, 151, 178, 0.4), 0 0 20px rgba(0, 151, 178, 0.25)'
+            boxShadow: '0 0 30px rgba(0, 180, 216, 0.5), 0 0 60px rgba(0, 180, 216, 0.3)'
           },
         },
       },
