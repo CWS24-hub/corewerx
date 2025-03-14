@@ -63,15 +63,15 @@ const AboutSection = () => {
               <div className="h-1 w-20 bg-bright-cyan/50 rounded"></div>
             </div>
             
-            <p className="text-white text-lg leading-relaxed font-medium">
+            <p className="text-black text-lg leading-relaxed font-medium">
               Founded in 2015 in Melbourne, Australia, our company quickly established itself as a premier IT solutions provider in the Australian market. Our innovative approach to cloud solutions and cybersecurity earned us recognition from industry leaders and a rapidly growing client base of mid to large enterprises.
             </p>
             
-            <p className="text-white text-lg leading-relaxed font-medium">
+            <p className="text-black text-lg leading-relaxed font-medium">
               After achieving remarkable success and building a portfolio of over 300 satisfied clients in Australia, we recognized an opportunity to bring our cutting-edge expertise to the dynamic UAE market. Our UAE division was established as a sister company to our Australian branch, bringing with us the same commitment to excellence and innovation that made us successful in Australia.
             </p>
             
-            <p className="text-white text-lg leading-relaxed font-medium">
+            <p className="text-black text-lg leading-relaxed font-medium">
               Today, we are proud to offer UAE businesses the same state-of-the-art technology solutions and services that have transformed our Australian clients' operations. Our unique blend of technical expertise, strategic insight, and client-focused approach continues to deliver exceptional value and measurable results for businesses across both regions.
             </p>
             
