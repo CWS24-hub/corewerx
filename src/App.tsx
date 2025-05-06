@@ -30,6 +30,9 @@ import ManagedIT from './pages/LandingPages/ManagedIT';
 import EmailLicensing from './pages/LandingPages/EmailLicensing';
 import BusinessContinuity from './pages/LandingPages/BusinessContinuity';
 
+// Tools Pages
+import M365Onboarding from './pages/Tools/M365Onboarding';
+
 // SEO Component
 const SEO = ({ location }: { location: { pathname: string } }) => {
   useEffect(() => {
@@ -46,6 +49,10 @@ const SEO = ({ location }: { location: { pathname: string } }) => {
       case '/landing/security':
         title = "Enterprise Cybersecurity Solutions | CoreWerx Solutions";
         description = "Comprehensive cybersecurity solutions including threat detection, SOC services, and security training. Protect your business with enterprise-grade security.";
+        break;
+      case '/tools/m365-onboarding':
+        title = "Microsoft 365 Onboarding Tool | CoreWerx Solutions";
+        description = "Streamline your Microsoft 365 account setup process with our internal IT onboarding tool. Simplify user creation and MFA setup.";
         break;
       // Add cases for other routes
     }
@@ -122,6 +129,9 @@ function App() {
         <Route path="/landing/managed-it" element={<ManagedIT />} />
         <Route path="/landing/email-licensing" element={<EmailLicensing />} />
         <Route path="/landing/continuity" element={<BusinessContinuity />} />
+        
+        {/* Tools Pages */}
+        <Route path="/tools/m365-onboarding" element={<M365Onboarding />} />
         
         {/* Main Website */}
         <Route path="/" element={

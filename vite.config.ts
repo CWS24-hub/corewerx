@@ -10,7 +10,10 @@ export default defineConfig({
   server: {
     host: true,
     port: 443,
-    https: true
+    https: true,
+    headers: {
+      'Cache-Control': 'no-store',
+    }
   },
   preview: {
     host: true,
@@ -19,7 +22,8 @@ export default defineConfig({
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Upgrade-Insecure-Requests': '1'
+      'Upgrade-Insecure-Requests': '1',
+      'Cache-Control': 'no-store'
     }
   }
 });

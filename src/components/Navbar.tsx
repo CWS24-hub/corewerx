@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Menu, X, Globe, ChevronDown, Shield, Cloud, Monitor, Users, Database, Server, Laptop, Network, BarChart, Briefcase, Wifi, Lock, FileCheck, MessageSquare, Settings, HardDrive } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, Shield, Cloud, Monitor, Users, Database, Server, Laptop, Network, BarChart, Briefcase, Wifi, Lock, FileCheck, MessageSquare, Settings, HardDrive, PenTool as Tool } from 'lucide-react';
 
 // Memoize service categories to prevent unnecessary re-renders
 const serviceCategories = [
@@ -153,13 +154,23 @@ const serviceCategories = [
   }
 ] as const;
 
+// Tools menu items
+const toolsMenu = [
+  {
+    name: "Microsoft 365 Onboarding",
+    description: "Streamline new user account setup",
+    icon: Users,
+    link: "/tools/m365-onboarding"
+  }
+];
+
 // Memoize the submenu component
 const SubMenu = memo(({ category, onClose }: { category: typeof serviceCategories[0], onClose: () => void }) => (
   <div className="absolute right-full top-0 w-64 bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200 -mr-1 z-[60]">
     <div className="p-4">
       {category.categories.map((subCategory, subIndex) => (
         <div key={subIndex} className="mb-4 last:mb-0">
-          <Link
+          <ScrollLink
             to={subCategory.link}
             spy={true}
             smooth={true}
@@ -171,11 +182,11 @@ const SubMenu = memo(({ category, onClose }: { category: typeof serviceCategorie
             <span className="border-b-2 border-transparent group-hover:border-amber-400">
               {subCategory.name}
             </span>
-          </Link>
+          </ScrollLink>
           <ul className="space-y-2 pl-7">
             {subCategory.services.map((service, serviceIndex) => (
               <li key={serviceIndex}>
-                <Link
+                <ScrollLink
                   to={subCategory.link}
                   spy={true}
                   smooth={true}
@@ -185,7 +196,7 @@ const SubMenu = memo(({ category, onClose }: { category: typeof serviceCategorie
                 >
                   <span className="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>
                   {service}
-                </Link>
+                </ScrollLink>
               </li>
             ))}
           </ul>
@@ -204,6 +215,7 @@ const Navbar = () => {
   const { scrollY } = useScroll();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -225,6 +237,7 @@ const Navbar = () => {
 
   const handleCloseMenu = useCallback(() => {
     setServicesOpen(false);
+    setToolsOpen(false);
     setActiveCategory(null);
   }, []);
 
@@ -239,28 +252,25 @@ const Navbar = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center">
-            <Link to="home" smooth={true} duration={500} className="flex items-center cursor-pointer">
+            <RouterLink to="/" className="flex items-center cursor-pointer">
               <img 
                 src="/images/noBgWhite.svg" 
                 alt="CoreWerx Solutions Logo" 
                 className="navbar-logo"
               />
-            </Link>
+            </RouterLink>
           </div>
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <Link
-                to="home"
-                spy={true}
-                smooth={true}
-                duration={500}
+              <RouterLink
+                to="/"
                 className="text-white hover:text-amber-300 px-3 py-2 text-lg font-medium cursor-pointer transition-colors"
               >
                 Home
-              </Link>
+              </RouterLink>
               
-              <Link
+              <ScrollLink
                 to="about"
                 spy={true}
                 smooth={true}
@@ -268,12 +278,18 @@ const Navbar = () => {
                 className="text-white hover:text-amber-300 px-3 py-2 text-lg font-medium cursor-pointer transition-colors"
               >
                 About Us
-              </Link>
+              </ScrollLink>
               
               <div className="relative">
                 <button 
-                  onClick={() => setServicesOpen(!servicesOpen)}
-                  onMouseEnter={() => setServicesOpen(true)}
+                  onClick={() => {
+                    setServicesOpen(!servicesOpen);
+                    setToolsOpen(false);
+                  }}
+                  onMouseEnter={() => {
+                    setServicesOpen(true);
+                    setToolsOpen(false);
+                  }}
                   className="text-white hover:text-amber-300 px-3 py-2 text-lg font-medium cursor-pointer transition-colors flex items-center gap-2"
                 >
                   Our Services
@@ -309,8 +325,47 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+
+              <div className="relative">
+                <button 
+                  onClick={() => {
+                    setToolsOpen(!toolsOpen);
+                    setServicesOpen(false);
+                  }}
+                  onMouseEnter={() => {
+                    setToolsOpen(true);
+                    setServicesOpen(false);
+                  }}
+                  className="text-white hover:text-amber-300 px-3 py-2 text-lg font-medium cursor-pointer transition-colors flex items-center gap-2"
+                >
+                  Tools
+                  <ChevronDown className={`w-4 h-4 transition-transform ${toolsOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {toolsOpen && (
+                  <div 
+                    className="absolute left-0 mt-2 w-64 bg-gray-50 shadow-xl rounded-lg overflow-hidden border border-gray-200 z-50"
+                    onMouseLeave={handleCloseMenu}
+                  >
+                    {toolsMenu.map((tool, index) => (
+                      <RouterLink
+                        key={index}
+                        to={tool.link}
+                        className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 group"
+                        onClick={handleCloseMenu}
+                      >
+                        <tool.icon className="w-5 h-5 text-amber-600" />
+                        <div>
+                          <div className="text-gray-700 font-medium">{tool.name}</div>
+                          <div className="text-sm text-gray-500">{tool.description}</div>
+                        </div>
+                      </RouterLink>
+                    ))}
+                  </div>
+                )}
+              </div>
               
-              <Link
+              <ScrollLink
                 to="contact"
                 spy={true}
                 smooth={true}
@@ -318,7 +373,7 @@ const Navbar = () => {
                 className="text-white hover:text-amber-300 px-3 py-2 text-lg font-medium cursor-pointer transition-colors"
               >
                 Contact Us
-              </Link>
+              </ScrollLink>
             </div>
           </div>
 
@@ -341,18 +396,15 @@ const Navbar = () => {
           className="md:hidden bg-gray-50 shadow-lg"
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
-              to="home"
-              spy={true}
-              smooth={true}
-              duration={500}
+            <RouterLink
+              to="/"
               className="text-gray-700 hover:text-amber-700 block px-3 py-2 text-base font-medium cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               Home
-            </Link>
+            </RouterLink>
             
-            <Link
+            <ScrollLink
               to="about"
               spy={true}
               smooth={true}
@@ -361,7 +413,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               About Us
-            </Link>
+            </ScrollLink>
             
             <div>
               <button 
@@ -391,7 +443,7 @@ const Navbar = () => {
                         <div className="pl-4 pt-2 space-y-4">
                           {category.categories.map((subCategory, subIndex) => (
                             <div key={subIndex} className="space-y-2">
-                              <Link
+                              <ScrollLink
                                 to={subCategory.link}
                                 spy={true}
                                 smooth={true}
@@ -405,11 +457,11 @@ const Navbar = () => {
                               >
                                 <subCategory.icon className="w-4 h-4" />
                                 {subCategory.name}
-                              </Link>
+                              </ScrollLink>
                               <ul className="pl-6 space-y-1">
                                 {subCategory.services.map((service, serviceIndex) => (
                                   <li key={serviceIndex}>
-                                    <Link
+                                    <ScrollLink
                                       to={subCategory.link}
                                       spy={true}
                                       smooth={true}
@@ -422,7 +474,7 @@ const Navbar = () => {
                                       className="text-gray-600 hover:text-amber-700 text-sm block py-1"
                                     >
                                       {service}
-                                    </Link>
+                                    </ScrollLink>
                                   </li>
                                 ))}
                               </ul>
@@ -435,8 +487,40 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+
+            <div>
+              <button 
+                onClick={() => setToolsOpen(!toolsOpen)}
+                className="text-gray-700 hover:text-amber-700 w-full text-left px-3 py-2 text-base font-medium cursor-pointer flex items-center justify-between"
+              >
+                Tools
+                <ChevronDown className={`w-4 h-4 transition-transform ${toolsOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {toolsOpen && (
+                <div className="pl-4 space-y-2 bg-gray-100">
+                  {toolsMenu.map((tool, index) => (
+                    <RouterLink
+                      key={index}
+                      to={tool.link}
+                      className="flex items-center gap-2 text-gray-700 hover:text-amber-700 px-3 py-2"
+                      onClick={() => {
+                        setToolsOpen(false);
+                        setIsOpen(false);
+                      }}
+                    >
+                      <tool.icon className="w-5 h-5 text-amber-600" />
+                      <div>
+                        <div className="font-medium">{tool.name}</div>
+                        <div className="text-sm text-gray-500">{tool.description}</div>
+                      </div>
+                    </RouterLink>
+                  ))}
+                </div>
+              )}
+            </div>
             
-            <Link
+            <ScrollLink
               to="contact"
               spy={true}
               smooth={true}
@@ -445,7 +529,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               Contact Us
-            </Link>
+            </ScrollLink>
           </div>
         </motion.div>
       )}

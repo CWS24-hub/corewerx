@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, LogOut, Users, Share2, Rocket, Layout, Palette, X, Plus, Trash2, Check, AlertTriangle, Key, RefreshCw, Lock, Edit, Save, Mail } from 'lucide-react';
+import { Settings, LogOut, Users, Share2, Rocket, Layout, Palette, X, Plus, Trash2, Check, AlertTriangle, Key, RefreshCw, Lock, Edit, Save, Mail, MessageSquare } from 'lucide-react';
 import LogoAdjuster from './LogoAdjuster';
 import DeploymentShare from './DeploymentShare';
+import ConsultationViewer from './ConsultationViewer';
 import { encrypt, decrypt, hashPassword, generateResetToken } from '../utils/crypto';
 import { sendPasswordResetEmail } from '../utils/emailService';
 import ResetPasswordModal from './ResetPasswordModal';
@@ -23,7 +24,7 @@ interface User {
 
 const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'logo' | 'users' | 'deploy'>('logo');
+  const [activeTab, setActiveTab] = useState<'logo' | 'users' | 'deploy' | 'consultations'>('consultations');
   const [showLogoAdjuster, setShowLogoAdjuster] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
   const [newUser, setNewUser] = useState({ 
@@ -277,6 +278,18 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
               
               <nav className="space-y-2 flex-1">
                 <button
+                  onClick={() => setActiveTab('consultations')}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    activeTab === 'consultations' 
+                      ? 'bg-bright-cyan text-white' 
+                      : 'text-gray-300 hover:bg-navy/50'
+                  }`}
+                >
+                  <MessageSquare size={18} />
+                  <span>Consultation Requests</span>
+                </button>
+                
+                <button
                   onClick={() => setActiveTab('logo')}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                     activeTab === 'logo' 
@@ -324,6 +337,13 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
             
             {/* Content Area */}
             <div className="flex-1 p-6 overflow-y-auto">
+              {activeTab === 'consultations' && (
+                <div>
+                  <h3 className="text-2xl font-bold mb-6 text-white">Consultation Requests</h3>
+                  <ConsultationViewer />
+                </div>
+              )}
+              
               {activeTab === 'logo' && (
                 <div>
                   <h3 className="text-2xl font-bold mb-6 text-white">Logo Adjustment</h3>

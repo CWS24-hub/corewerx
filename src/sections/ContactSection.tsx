@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, Shield } from 'lucide-react';
 import StaticBackground from '../components/StaticBackground';
+import BookingWidget from '../components/BookingWidget';
 
 const ContactSection = () => {
   return (
@@ -24,69 +25,9 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form and Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="bg-navy/85 p-8 rounded-lg backdrop-blur-sm border border-bright-cyan/20"
-          >
-            <h2 className="text-2xl font-bold mb-6 text-white">Send us a Message</h2>
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-200 mb-2">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full bg-navy/30 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-bright-cyan"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full bg-navy/30 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-bright-cyan"
-                  placeholder="john@example.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-200 mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  className="w-full bg-navy/30 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-bright-cyan"
-                  placeholder="+971 50 000 0000"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-200 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  className="w-full bg-navy/30 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-bright-cyan"
-                  placeholder="How can we help you?"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-bright-cyan hover:bg-electric-blue text-white font-bold py-3 rounded-lg transition duration-300 button-glow"
-              >
-                Send Message
-              </button>
-            </form>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="space-y-8"
@@ -130,7 +71,8 @@ const ContactSection = () => {
                       Sunday - Thursday: 9:00 AM - 6:00 PM<br />
                       Friday - Saturday: Closed
                     </p>
-                  </div> </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -146,6 +88,15 @@ const ContactSection = () => {
                 Schedule Security Assessment
               </button>
             </div>
+          </motion.div>
+
+          {/* Booking Widget */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <BookingWidget />
           </motion.div>
         </div>
       </div>
