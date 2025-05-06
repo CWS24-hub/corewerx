@@ -8,22 +8,22 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   build: {
-    // Ensure proper asset handling
+    outDir: 'dist',
     assetsDir: 'assets',
-    // Generate sourcemaps for better debugging
     sourcemap: true,
-    // Optimize chunk size
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['framer-motion', 'lucide-react'],
         },
       },
     },
   },
   server: {
+    port: 3000,
     host: true,
-    port: 3000
+    open: true
   },
   preview: {
     port: 3000
