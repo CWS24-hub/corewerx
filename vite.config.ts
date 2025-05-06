@@ -1,41 +1,31 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  server: {
-    host: true,
-    port: 443,
-    https: true,
-    headers: {
-      'Cache-Control': 'no-store',
-    }
-  },
-  preview: {
-    host: true,
-    port: 5173,
-    strictPort: true,
-    headers: {
-      'Cross-Origin-Opener-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Upgrade-Insecure-Requests': '1',
-      'Cache-Control': 'no-store'
-    }
-  },
   build: {
+    // Ensure proper asset handling
+    assetsDir: 'assets',
+    // Generate sourcemaps for better debugging
     sourcemap: true,
-    // Ensure environment variables are replaced during build
+    // Optimize chunk size
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom']
-        }
-      }
-    }
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
   },
-  // Add better environment variable handling
-  envPrefix: 'VITE_'
+  server: {
+    host: true,
+    port: 3000
+  },
+  preview: {
+    port: 3000
+  }
 });
